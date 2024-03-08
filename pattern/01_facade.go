@@ -1,4 +1,4 @@
-package D
+package pattern
 
 import (
 	"errors"
@@ -52,7 +52,7 @@ type Spotify struct {
 // который хранит под копотом всю сложную систему, описанную выше
 func (s *Spotify) Subscribe(user User) error {
 	if user.GetBalance() < s.Subscription {
-		return errors.New("Недостаточно средств")
+		return errors.New("недостаточно средств")
 	}
 	user.IsSubscribed = true
 	return nil
