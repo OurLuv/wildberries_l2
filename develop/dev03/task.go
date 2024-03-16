@@ -98,6 +98,22 @@ func parseNumericSuffix(s string) (int, string) {
 	return 0, s
 }
 
+// пишет файл с результатом
+func writeLinesToFile(lines [][]string, filePath string) {
+	file, err := os.Create(filePath)
+	if err != nil {
+		fmt.Println("Error creating file:", err)
+		os.Exit(1)
+	}
+	defer file.Close()
+
+	writer := bufio.NewWriter(file)
+	for _, line := range lines {
+		fmt.Fprintln(writer, strings.Join(line[:], " "))
+	}
+	writer.Flush()
+}
+
 func main() {
 	// flags
 	filepath := flag.String("file", "input.txt", "Path to the file")
@@ -155,6 +171,7 @@ func main() {
 	if unique {
 		lines = DeleteDuplicates(lines)
 	}
+	writeLinesToFile(lines, "output.txt")
 	if checkSorted {
 		if isSorted(lines, reverse) {
 			fmt.Println("Data is sorted")
@@ -162,6 +179,4 @@ func main() {
 			fmt.Println("Data is not sorted")
 		}
 	}
-
-	fmt.Println(lines)
 }
