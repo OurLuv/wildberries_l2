@@ -26,7 +26,7 @@ import (
 func cd(args []string) {
 	err := os.Chdir(args[1])
 	if err != nil {
-		fmt.Println("Error changing directory:", err)
+		fmt.Println("error changing directory:", err)
 	} else {
 		fmt.Println("Directory changed")
 	}
@@ -41,7 +41,7 @@ func echo(args []string) {
 func pwd() {
 	dir, err := os.Getwd()
 	if err != nil {
-		fmt.Println("Error getting current directory:", err)
+		fmt.Println("error getting current directory:", err)
 	} else {
 		fmt.Println(dir)
 	}
@@ -52,7 +52,7 @@ func ps() {
 	cmd := exec.Command("ps")
 	out, err := cmd.Output()
 	if err != nil {
-		fmt.Println("Error running ps command:", err)
+		fmt.Println("error running ps command:", err)
 	} else {
 		fmt.Println(string(out))
 	}
@@ -64,7 +64,7 @@ func kill(args []string) {
 	cmd := exec.Command("kill", pid)
 	err := cmd.Run()
 	if err != nil {
-		fmt.Println("Error killing process:", err)
+		fmt.Println("error killing process:", err)
 	}
 }
 
@@ -76,7 +76,7 @@ func main() {
 
 		input, err := reader.ReadString('\n')
 		if err != nil {
-			fmt.Println("Error reading input:", err)
+			fmt.Println("error reading input:", err)
 			continue
 		}
 

@@ -19,7 +19,7 @@ func (h *Handler) CreateEvent(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		err := r.ParseForm()
 		if err != nil {
-			SendError(w, "Failed to parse form data: "+err.Error(), http.StatusBadRequest)
+			SendError(w, "failed to parse form data: "+err.Error(), http.StatusBadRequest)
 			return
 		}
 
@@ -47,7 +47,7 @@ func (h *Handler) CreateEvent(w http.ResponseWriter, r *http.Request) {
 		SendResult(w, *result)
 
 	} else {
-		SendError(w, "Method not allowed", http.StatusMethodNotAllowed)
+		SendError(w, "method not allowed", http.StatusMethodNotAllowed)
 	}
 }
 
@@ -80,10 +80,10 @@ func (h *Handler) UpdateEvent(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		SendResult(w, "Event is updated")
+		SendResult(w, "event is updated")
 
 	} else {
-		SendError(w, "Method not allowed", http.StatusMethodNotAllowed)
+		SendError(w, "method not allowed", http.StatusMethodNotAllowed)
 	}
 }
 
@@ -93,7 +93,7 @@ func (h *Handler) DeleteEvent(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		err := r.ParseForm()
 		if err != nil {
-			SendError(w, "Failed to parse form data: "+err.Error(), http.StatusBadRequest)
+			SendError(w, "failed to parse form data: "+err.Error(), http.StatusBadRequest)
 			return
 		}
 
@@ -105,7 +105,7 @@ func (h *Handler) DeleteEvent(w http.ResponseWriter, r *http.Request) {
 
 		user_id, err := GetIdFromReq(r.Form, "user_id")
 		if err != nil {
-			SendError(w, "Failed to parse form data: "+err.Error(), http.StatusBadRequest)
+			SendError(w, "failed to parse form data: "+err.Error(), http.StatusBadRequest)
 			return
 		}
 
@@ -114,10 +114,10 @@ func (h *Handler) DeleteEvent(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		SendResult(w, "Event is deleted")
+		SendResult(w, "event is deleted")
 
 	} else {
-		SendError(w, "Method not allowed", http.StatusMethodNotAllowed)
+		SendError(w, "method not allowed", http.StatusMethodNotAllowed)
 	}
 }
 
@@ -128,35 +128,35 @@ func (h *Handler) GetEventsForDay(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		user_idStr := r.URL.Query().Get("user_id")
 		if user_idStr == "" {
-			SendError(w, "Missing user id", http.StatusBadRequest)
+			SendError(w, "missing user id", http.StatusBadRequest)
 			return
 		}
 		user_idInt, err := strconv.Atoi(user_idStr)
 		user_id := uint64(user_idInt)
 		if err != nil {
-			SendError(w, "Can't parse a user id", http.StatusBadRequest)
+			SendError(w, "can't parse a user id", http.StatusBadRequest)
 			return
 		}
 		dayStr := r.URL.Query().Get("date")
 		if dayStr == "" {
-			SendError(w, "Missing day", http.StatusBadRequest)
+			SendError(w, "missing day", http.StatusBadRequest)
 			return
 		}
 		day, err := time.Parse("2006-01-02", dayStr)
 		if err != nil {
-			SendError(w, "Can't parse a date", http.StatusBadRequest)
+			SendError(w, "can't parse a date", http.StatusBadRequest)
 			return
 		}
 
 		events, err := h.EventService.AllForDay(user_id, day)
 		if err != nil {
-			SendError(w, "Can't parse a date", http.StatusServiceUnavailable)
+			SendError(w, "can't parse a date", http.StatusServiceUnavailable)
 			return
 		}
 
 		SendResult(w, events)
 	} else {
-		SendError(w, "Method not allowed", http.StatusMethodNotAllowed)
+		SendError(w, "method not allowed", http.StatusMethodNotAllowed)
 	}
 }
 
@@ -167,35 +167,35 @@ func (h *Handler) GetEventsForWeek(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		user_idStr := r.URL.Query().Get("user_id")
 		if user_idStr == "" {
-			SendError(w, "Missing user id", http.StatusBadRequest)
+			SendError(w, "missing user id", http.StatusBadRequest)
 			return
 		}
 		user_idInt, err := strconv.Atoi(user_idStr)
 		user_id := uint64(user_idInt)
 		if err != nil {
-			SendError(w, "Can't parse a user id", http.StatusBadRequest)
+			SendError(w, "can't parse a user id", http.StatusBadRequest)
 			return
 		}
 		dayStr := r.URL.Query().Get("date")
 		if dayStr == "" {
-			SendError(w, "Missing day", http.StatusBadRequest)
+			SendError(w, "missing day", http.StatusBadRequest)
 			return
 		}
 		day, err := time.Parse("2006-01-02", dayStr)
 		if err != nil {
-			SendError(w, "Can't parse a date", http.StatusBadRequest)
+			SendError(w, "can't parse a date", http.StatusBadRequest)
 			return
 		}
 
 		events, err := h.EventService.AllForWeek(user_id, day)
 		if err != nil {
-			SendError(w, "Can't parse a date", http.StatusServiceUnavailable)
+			SendError(w, "can't parse a date", http.StatusServiceUnavailable)
 			return
 		}
 
 		SendResult(w, events)
 	} else {
-		SendError(w, "Method not allowed", http.StatusMethodNotAllowed)
+		SendError(w, "method not allowed", http.StatusMethodNotAllowed)
 	}
 }
 
@@ -206,34 +206,34 @@ func (h *Handler) GetEventsForMonth(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		user_idStr := r.URL.Query().Get("user_id")
 		if user_idStr == "" {
-			SendError(w, "Missing user id", http.StatusBadRequest)
+			SendError(w, "missing user id", http.StatusBadRequest)
 			return
 		}
 		user_idInt, err := strconv.Atoi(user_idStr)
 		user_id := uint64(user_idInt)
 		if err != nil {
-			SendError(w, "Can't parse a user id", http.StatusBadRequest)
+			SendError(w, "can't parse a user id", http.StatusBadRequest)
 			return
 		}
 		dayStr := r.URL.Query().Get("date")
 		if dayStr == "" {
-			SendError(w, "Missing day", http.StatusBadRequest)
+			SendError(w, "missing day", http.StatusBadRequest)
 			return
 		}
 		day, err := time.Parse("2006-01-02", dayStr)
 		if err != nil {
-			SendError(w, "Can't parse a date", http.StatusBadRequest)
+			SendError(w, "can't parse a date", http.StatusBadRequest)
 			return
 		}
 
 		events, err := h.EventService.AllForMonth(user_id, day)
 		if err != nil {
-			SendError(w, "Can't parse a date", http.StatusServiceUnavailable)
+			SendError(w, "can't parse a date", http.StatusServiceUnavailable)
 			return
 		}
 
 		SendResult(w, events)
 	} else {
-		SendError(w, "Method not allowed", http.StatusMethodNotAllowed)
+		SendError(w, "method not allowed", http.StatusMethodNotAllowed)
 	}
 }
